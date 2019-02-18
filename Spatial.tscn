@@ -15,22 +15,22 @@ subdivide_depth = 0
 
 extents = Vector3( 1, 1, 1 )
 
-[sub_resource type="Environment" id=5]
+[sub_resource type="Environment" id=6]
 
 background_mode = 1
 background_sky_custom_fov = 0.0
-background_color = Color( 1, 1, 1, 1 )
+background_color = Color( 1, 0.046875, 0.046875, 1 )
 background_energy = 1.0
 background_canvas_max_layer = 0
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_energy = 1.0
 ambient_light_sky_contribution = 1.0
 fog_enabled = false
-fog_color = Color( 0, 0, 0, 1 )
-fog_sun_color = Color( 1, 1, 1, 1 )
+fog_color = Color( 0.5, 0.6, 0.7, 1 )
+fog_sun_color = Color( 1, 0.9, 0.7, 1 )
 fog_sun_amount = 0.0
 fog_depth_enabled = true
-fog_depth_begin = 1.0
+fog_depth_begin = 10.0
 fog_depth_curve = 1.0
 fog_transmit_enabled = false
 fog_transmit_curve = 1.0
@@ -65,9 +65,9 @@ ssao_blur = 3
 ssao_edge_sharpness = 4.0
 dof_blur_far_enabled = false
 dof_blur_far_distance = 10.0
-dof_blur_far_transition = 8.0
-dof_blur_far_amount = 0.08
-dof_blur_far_quality = 2
+dof_blur_far_transition = 5.0
+dof_blur_far_amount = 0.1
+dof_blur_far_quality = 1
 dof_blur_near_enabled = false
 dof_blur_near_distance = 2.0
 dof_blur_near_transition = 1.0
@@ -81,7 +81,7 @@ glow_levels/4 = false
 glow_levels/5 = true
 glow_levels/6 = false
 glow_levels/7 = false
-glow_intensity = 2.0
+glow_intensity = 0.8
 glow_strength = 1.0
 glow_bloom = 0.0
 glow_blend_mode = 2
@@ -92,13 +92,13 @@ adjustment_enabled = false
 adjustment_brightness = 1.0
 adjustment_contrast = 1.0
 adjustment_saturation = 1.0
-_sections_unfolded = [ "Ambient Light", "Auto Exposure", "Background", "DOF Far Blur", "DOF Near Blur", "Fog", "Glow", "SS Reflections", "SSAO", "Tonemap" ]
+_sections_unfolded = [ "Adjustments", "Ambient Light", "Auto Exposure", "Background", "DOF Far Blur", "DOF Near Blur", "Fog", "Glow", "SS Reflections", "SSAO", "Tonemap" ]
 
-[sub_resource type="World" id=2]
+[sub_resource type="World" id=5]
 
-environment = SubResource( 5 )
+environment = SubResource( 6 )
 
-[node name="Spatial" type="Spatial" index="0"]
+[node name="Spatial" type="Spatial"]
 
 [node name="StaticBody" type="StaticBody" parent="." index="0"]
 
@@ -136,16 +136,8 @@ disabled = false
 
 [node name="FirstPersonController" parent="." index="1" instance=ExtResource( 1 )]
 
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 6 )
-
-[node name="Camera" parent="FirstPersonController/Player" index="0"]
-
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0 )
-fov = 75.0
-
-[node name="CollisionShape" parent="FirstPersonController/Player" index="1"]
-
-transform = Transform( 0.5, -3.55271e-15, -3.01876e-11, -1.50938e-11, -0.000172653, -1, -3.55271e-15, 0.5, -0.000345306, 0, 0, 0 )
 
 [node name="EnemyRigidBody" parent="." index="2" instance=ExtResource( 2 )]
 
@@ -174,7 +166,7 @@ _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "M
 arvr = false
 size = Vector2( 640, 360 )
 own_world = false
-world = SubResource( 2 )
+world = SubResource( 5 )
 transparent_bg = true
 msaa = 0
 hdr = false
@@ -197,4 +189,3 @@ shadow_atlas_quad_3 = 4
 _sections_unfolded = [ "Audio Listener", "GUI", "Physics", "Render Target", "Rendering", "Shadow Atlas" ]
 
 
-[editable path="FirstPersonController"]

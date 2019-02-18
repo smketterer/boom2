@@ -51,7 +51,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="EnemySprite3D" type="Sprite3D" parent="EnemyRigidBody" index="1"]
 
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.0588868, 0 )
 layers = 1
 material_override = ExtResource( 1 )
 cast_shadow = 0
