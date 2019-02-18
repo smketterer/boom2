@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://gameboy.shader" type="Shader" id=1]
+
+[resource]
+
+render_priority = 0
+shader = ExtResource( 1 )
+shader_param/color_1 = Plane( 0.505882, 0.529412, 0.407843, 1 )
+shader_param/color_2 = Color( 0.294118, 0.313726, 0.247059, 1 )
+shader_param/color_3 = Color( 0.152941, 0.172549, 0.145098, 1 )
+shader_param/color_4 = Color( 0.0705882, 0.0901961, 0.0862745, 1 )
+shader_param/offset = 0.418
+_sections_unfolded = [ "shader_param" ]
+
