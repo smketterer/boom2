@@ -14,7 +14,6 @@ func initializeComponents():
 
 func _ready():
 	self.initializeComponents()
-
 	pass
 
 func _input(event):
