@@ -1,14 +1,10 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://gameboy_shader_material.tres" type="Material" id=1]
-[ext_resource path="res://default_env.tres" type="Environment" id=2]
-[ext_resource path="res://FirstPersonController.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Enemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://mesh_library.tres" type="MeshLibrary" id=5]
-
-[sub_resource type="World" id=3]
-
-environment = ExtResource( 2 )
+[ext_resource path="res://FirstPersonController.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://mesh_library.tres" type="MeshLibrary" id=3]
+[ext_resource path="res://gameboy_shader_material.tres" type="Material" id=4]
+[ext_resource path="res://default_env.tres" type="Environment" id=5]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -22,55 +18,13 @@ subdivide_depth = 0
 
 extents = Vector3( 1, 1, 1 )
 
+[sub_resource type="World" id=3]
+
+environment = ExtResource( 5 )
+
 [node name="Spatial" type="Spatial" index="0"]
 
-[node name="ViewportContainer" type="ViewportContainer" parent="." index="0"]
-
-material = ExtResource( 1 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 1920.0
-margin_bottom = 1080.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-stretch = true
-stretch_shrink = 3
-_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Theme" ]
-
-[node name="Viewport" type="Viewport" parent="ViewportContainer" index="0"]
-
-arvr = false
-size = Vector2( 640, 360 )
-own_world = false
-world = SubResource( 3 )
-transparent_bg = true
-msaa = 0
-hdr = false
-disable_3d = false
-usage = 3
-debug_draw = 0
-render_target_v_flip = false
-render_target_clear_mode = 0
-render_target_update_mode = 3
-audio_listener_enable_2d = false
-audio_listener_enable_3d = true
-physics_object_picking = false
-gui_disable_input = false
-gui_snap_controls_to_pixels = true
-shadow_atlas_size = 0
-shadow_atlas_quad_0 = 2
-shadow_atlas_quad_1 = 2
-shadow_atlas_quad_2 = 3
-shadow_atlas_quad_3 = 4
-_sections_unfolded = [ "Audio Listener", "GUI", "Physics", "Render Target", "Rendering", "Shadow Atlas" ]
-
-[node name="StaticBody" type="StaticBody" parent="ViewportContainer/Viewport" index="0"]
+[node name="StaticBody" type="StaticBody" parent="." index="0"]
 
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
@@ -84,9 +38,10 @@ constant_linear_velocity = Vector3( 0, 0, 0 )
 constant_angular_velocity = Vector3( 0, 0, 0 )
 _sections_unfolded = [ "Collision", "Transform" ]
 
-[node name="MeshInstance" type="MeshInstance" parent="ViewportContainer/Viewport/StaticBody" index="0"]
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody" index="0"]
 
 transform = Transform( 10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0 )
+visible = false
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -101,7 +56,7 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform", "material" ]
 
-[node name="CollisionShape" type="CollisionShape" parent="ViewportContainer/Viewport/StaticBody" index="1"]
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="1"]
 
 transform = Transform( 10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0 )
 visible = false
@@ -109,17 +64,17 @@ shape = SubResource( 2 )
 disabled = false
 _sections_unfolded = [ "Transform" ]
 
-[node name="FirstPersonController" parent="ViewportContainer/Viewport" index="1" instance=ExtResource( 3 )]
+[node name="FirstPersonController" parent="." index="1" instance=ExtResource( 1 )]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5 )
 
-[node name="EnemyRigidBody" parent="ViewportContainer/Viewport" index="2" instance=ExtResource( 4 )]
+[node name="EnemyRigidBody" parent="." index="2" instance=ExtResource( 2 )]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3 )
 
-[node name="GridMap" type="GridMap" parent="ViewportContainer/Viewport" index="3"]
+[node name="GridMap" type="GridMap" parent="." index="3"]
 
-theme = ExtResource( 5 )
+theme = ExtResource( 3 )
 cell_size = Vector3( 4, 4, 4 )
 cell_octant_size = 32
 cell_center_x = false
@@ -129,12 +84,59 @@ cell_scale = 1.0
 collision_layer = 1
 collision_mask = 1
 data = {
-"cells": PoolIntArray( 3, 0, 536870912, 65533, 0, 536870912, 3, 1, 0, 65533, 1, 0, 3, 2, 536870912, 65533, 2, 0, 0, 3, 0, 1, 3, 536870912, 2, 3, 536870912, 3, 3, 536870912, 65533, 3, 0, 65534, 3, 0, 65535, 3, 0, 0, 65533, 536870912, 1, 65533, 536870912, 2, 65533, 0, 3, 65533, 0, 65533, 65533, 0, 65534, 65533, 536870912, 65535, 65533, 536870912, 3, 65534, 0, 65533, 65534, 0, 3, 65535, 0, 65533, 65535, 0 )
+"cells": PoolIntArray( 3, 0, 0, 65533, 0, 0, 3, 1, 0, 65533, 1, 536870912, 3, 2, 0, 65533, 2, 0, 0, 3, 536870912, 1, 3, 0, 2, 3, 536870912, 3, 3, 0, 65533, 3, 536870912, 65534, 3, 536870912, 65535, 3, 0, 0, 65533, 0, 1, 65533, 0, 2, 65533, 536870912, 3, 65533, 0, 65533, 65533, 0, 65534, 65533, 0, 65535, 65533, 536870912, 3, 65534, 0, 65533, 65534, 536870912, 3, 65535, 0, 65533, 65535, 0 )
 }
 _sections_unfolded = [ "Cell", "Collision", "Transform", "Visibility" ]
 __meta__ = {
 "_editor_clip_": 1,
 "_editor_floor_": Vector3( 0, 0, 0 )
 }
+
+[node name="ViewportContainer" type="ViewportContainer" parent="." index="4"]
+
+visible = false
+material = ExtResource( 4 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+stretch = true
+stretch_shrink = 1
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Theme" ]
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer" index="0"]
+
+arvr = false
+size = Vector2( 1920, 1080 )
+own_world = false
+world = SubResource( 3 )
+transparent_bg = true
+msaa = 0
+hdr = false
+disable_3d = false
+usage = 3
+debug_draw = 0
+render_target_v_flip = false
+render_target_clear_mode = 0
+render_target_update_mode = 0
+audio_listener_enable_2d = false
+audio_listener_enable_3d = true
+physics_object_picking = false
+gui_disable_input = false
+gui_snap_controls_to_pixels = true
+shadow_atlas_size = 0
+shadow_atlas_quad_0 = 2
+shadow_atlas_quad_1 = 2
+shadow_atlas_quad_2 = 3
+shadow_atlas_quad_3 = 4
+_sections_unfolded = [ "Audio Listener", "GUI", "Physics", "Render Target", "Rendering", "Shadow Atlas" ]
 
 

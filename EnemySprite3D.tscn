@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://billboard.tres" type="Material" id=1]
-[ext_resource path="res://enemy0.png" type="Texture" id=2]
+[ext_resource path="res://sprites/enemy0.png" type="Texture" id=2]
 
-[node name="EnemySprite3D" type="Sprite3D"]
+[node name="EnemySprite3D" type="Sprite3D" index="0"]
 
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.0588868, 0 )
 layers = 1

@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://EnemySprite3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/enemy0.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
 
 radius = 1.0
 height = 1.0
 
-[node name="Enemy" type="Spatial"]
+[node name="Enemy" type="Spatial" index="0"]
 
 _sections_unfolded = [ "Transform", "Visibility" ]
 
@@ -49,5 +50,7 @@ disabled = false
 _sections_unfolded = [ "Transform" ]
 
 [node name="EnemySprite3D" parent="EnemyRigidBody" index="1" instance=ExtResource( 1 )]
+
+texture = ExtResource( 2 )
 
 

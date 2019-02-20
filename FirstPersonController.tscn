@@ -3,14 +3,14 @@
 [ext_resource path="res://PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Camera.gd" type="Script" id=2]
 [ext_resource path="res://billboard.tres" type="Material" id=3]
-[ext_resource path="res://enemy0.png" type="Texture" id=4]
+[ext_resource path="res://sprites/enemy0.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
 
 radius = 1.0
 height = 1.0
 
-[node name="FirstPersonController" type="Spatial"]
+[node name="FirstPersonController" type="Spatial" index="0"]
 
 _sections_unfolded = [ "Transform" ]
 
