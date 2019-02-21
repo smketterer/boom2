@@ -5,9 +5,9 @@ const INVERSION_MULT = 1
 const MAX_Y = 89
 
 func initializeComponents():
-	SENSITIVITY_Y = self.get_parent().Sensitivity_Y
-	MAX_Y = self.get_parent().Maximum_Y_Look
-	if self.get_parent().Invert_Y_Axis:
+	SENSITIVITY_Y = self.get_parent().sensitivity_y
+	MAX_Y = self.get_parent().max_y_look
+	if self.get_parent().invert_y_axis:
 		INVERSION_MULT = 1
 	else:
 		INVERSION_MULT = -1

@@ -1,60 +1,88 @@
 extends KinematicBody
 
-export var Sensitivity_X = 0.01
-export var Sensitivity_Y = 0.0025
-export var Invert_Y_Axis = false
-export var Exit_On_Escape = true
-export var Maximum_Y_Look = 45
-export var Accelaration = 10.0
-export var Maximum_Walk_Speed = 2.5
-export var Jump_Speed = 5.0
+export var sensitivity_x = 0.01
+export var sensitivity_y = 0.0025
+export var invert_y_axis = false
+export var exit_on_escape = true
+export var max_y_look = 45
+export var friction = 0.95
+export var max_walk_speed = 10.0
+export var walk_speed = 1.0
+export var max_run_speed = 17.5
+export var run_speed = 2.0
+export var jump_speed = 10.0
 
-const GRAVITY = 0.098
+export var GRAVITY = 0.5
+
+var acceleration = Vector3(walk_speed, jump_speed, walk_speed)
 var velocity = Vector3(0,0,0)
-var speed = 0
+var max_speed = max_walk_speed
+var current_time = 0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	set_process(true)
 
 func _process(delta):
-	if Exit_On_Escape:
+	if exit_on_escape:
 		if Input.is_key_pressed(KEY_ESCAPE):
 			get_tree().quit()
 
 func _physics_process(delta):
 	velocity.y -= GRAVITY
 
-	if Input.is_action_pressed('MOVE_FORWARD') or Input.is_action_pressed('MOVE_BACKWARD') or Input.is_action_pressed('MOVE_LEFT') or Input.is_action_pressed('MOVE_RIGHT'):
-		speed += Accelaration
-		if speed > Maximum_Walk_Speed:
-			speed = Maximum_Walk_Speed
+	if Input.is_key_pressed(KEY_SHIFT):
+		acceleration = Vector3(run_speed, jump_speed, run_speed)
+		max_speed = max_run_speed
+		# get_node("Camera").fov = 65
+	else:
+		acceleration = Vector3(walk_speed, jump_speed, walk_speed)
+		max_speed = max_walk_speed
+		# get_node("Camera").fov = 70
 
 	if Input.is_action_pressed('MOVE_FORWARD'):
-		velocity.x = -global_transform.basis.z.x * speed
-		velocity.z = -global_transform.basis.z.z * speed
+		velocity.x += -global_transform.basis.z.x * acceleration.x
+		velocity.z += -global_transform.basis.z.z * acceleration.z
 	if Input.is_action_pressed('MOVE_BACKWARD'):
-		velocity.x = global_transform.basis.z.x * speed
-		velocity.z = global_transform.basis.z.z * speed
+		velocity.x += global_transform.basis.z.x * acceleration.x
+		velocity.z += global_transform.basis.z.z * acceleration.z
 	if Input.is_action_pressed('MOVE_LEFT'):
-		velocity.x = -global_transform.basis.x.x * speed
-		velocity.z = -global_transform.basis.x.z * speed
+		velocity.x += -global_transform.basis.x.x * acceleration.x
+		velocity.z += -global_transform.basis.x.z * acceleration.z
 	if Input.is_action_pressed('MOVE_RIGHT'):
-		velocity.x = global_transform.basis.x.x * speed
-		velocity.z = global_transform.basis.x.z * speed
-
-	if not(Input.is_action_pressed('MOVE_FORWARD') or Input.is_action_pressed('MOVE_BACKWARD') or Input.is_action_pressed('MOVE_LEFT') or Input.is_action_pressed('MOVE_RIGHT')):
-		speed = 0
-		velocity.x = 0
-		velocity.z = 0
+		velocity.x += global_transform.basis.x.x * acceleration.x
+		velocity.z += global_transform.basis.x.z * acceleration.z
 
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_accept"):
-			velocity.y = Jump_Speed
+			velocity.y = acceleration.y
+
+	# Apply friction and cap speeds.
+	velocity.x *= friction
+	velocity.z *= friction
+
+	# Store the current y velocity so we can restore it later.
+	var vy = velocity.y
+	velocity.y = 0
+	# Now with just the x and z axis in the velocity apply the speed limitation.
+	if velocity.length() > max_speed:
+		velocity = velocity.normalized() * max_speed
+	# Then restore the y component of the velocity, which will be unrestricted.
+	velocity.y = vy
 
 	velocity = move_and_slide(velocity, Vector3(0,1,0))
+
+	current_time += delta
+
+	var bob_h = cos(current_time / deg2rad(20)) * abs(velocity.length() / max_speed) * 32
+	var bob_v = sin(current_time / deg2rad(10)) * abs(velocity.length() / max_speed) * 16
+	var weapon_x = 960 + bob_h
+	var weapon_y = 848 + bob_v
+
+	get_node("Weapon").position.x = weapon_x
+	get_node("Weapon").position.y = weapon_y
 
 # Rotate X
 func _input(event):
 	if event is InputEventMouseMotion:
-		rotate_y(-Sensitivity_X * event.relative.x)
+		rotate_y(-sensitivity_x * event.relative.x)

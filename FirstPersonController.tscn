@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Camera.gd" type="Script" id=2]
 [ext_resource path="res://billboard.tres" type="Material" id=3]
 [ext_resource path="res://sprites/enemy0.png" type="Texture" id=4]
+[ext_resource path="res://sprites/pistol.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -29,14 +30,18 @@ axis_lock_angular_z = false
 collision/safe_margin = 0.001
 script = ExtResource( 1 )
 _sections_unfolded = [ "Axis Lock", "Collision", "Transform", "collision" ]
-Sensitivity_X = 0.001
-Sensitivity_Y = 0.001
-Invert_Y_Axis = false
-Exit_On_Escape = true
-Maximum_Y_Look = 45
-Accelaration = 1.0
-Maximum_Walk_Speed = 10.0
-Jump_Speed = 5.0
+sensitivity_x = 0.01
+sensitivity_y = 0.0025
+invert_y_axis = false
+exit_on_escape = true
+max_y_look = 45
+friction = 0.95
+max_walk_speed = 10.0
+walk_speed = 1.5
+max_run_speed = 17.5
+run_speed = 2.0
+jump_speed = 10.0
+GRAVITY = 0.5
 
 [node name="Camera" type="Camera" parent="Player" index="0"]
 
@@ -62,7 +67,7 @@ shape = SubResource( 1 )
 disabled = false
 _sections_unfolded = [ "Transform" ]
 
-[node name="Sprite3D" type="Sprite3D" parent="Player" index="2"]
+[node name="CharacterSprite" type="Sprite3D" parent="Player" index="2"]
 
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.6, 0 )
 visible = false
@@ -94,5 +99,12 @@ frame = 0
 region_enabled = false
 region_rect = Rect2( 0, 0, 0, 0 )
 _sections_unfolded = [ "Animation", "Flags", "Geometry", "LOD", "Pause", "Region", "Transform", "Visibility" ]
+
+[node name="Weapon" type="Sprite" parent="Player" index="3"]
+
+position = Vector2( 960, 848 )
+scale = Vector2( 12, 12 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
 
 
