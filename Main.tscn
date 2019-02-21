@@ -4,7 +4,7 @@
 [ext_resource path="res://default_env.tres" type="Environment" id=2]
 [ext_resource path="res://TestArea.tscn" type="PackedScene" id=3]
 
-[sub_resource type="World" id=3]
+[sub_resource type="World" id=1]
 
 environment = ExtResource( 2 )
 
@@ -34,7 +34,7 @@ _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "M
 arvr = false
 size = Vector2( 1920, 1080 )
 own_world = false
-world = SubResource( 3 )
+world = SubResource( 1 )
 transparent_bg = true
 msaa = 0
 hdr = false

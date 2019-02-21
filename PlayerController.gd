@@ -11,12 +11,10 @@ export var Jump_Speed = 5.0
 
 const GRAVITY = 0.098
 var velocity = Vector3(0,0,0)
-var forward_velocity = 0
-var Walk_Speed = 0
+var speed = 0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	forward_velocity = Walk_Speed
 	set_process(true)
 
 func _process(delta):
@@ -27,31 +25,33 @@ func _process(delta):
 func _physics_process(delta):
 	velocity.y -= GRAVITY
 
-	if Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_D):
-		Walk_Speed += Accelaration
-		if Walk_Speed > Maximum_Walk_Speed:
-			Walk_Speed = Maximum_Walk_Speed
-	if Input.is_key_pressed(KEY_W):
-		velocity.x = -global_transform.basis.z.x * Walk_Speed
-		velocity.z = -global_transform.basis.z.z * Walk_Speed
-	if Input.is_key_pressed(KEY_S):
-		velocity.x = global_transform.basis.z.x * Walk_Speed
-		velocity.z = global_transform.basis.z.z * Walk_Speed
-	if Input.is_key_pressed(KEY_A):
-		velocity.x = -global_transform.basis.x.x * Walk_Speed
-		velocity.z = -global_transform.basis.x.z * Walk_Speed
-	if Input.is_key_pressed(KEY_D):
-		velocity.x = global_transform.basis.x.x * Walk_Speed
-		velocity.z = global_transform.basis.x.z * Walk_Speed
+	if Input.is_action_pressed('MOVE_FORWARD') or Input.is_action_pressed('MOVE_BACKWARD') or Input.is_action_pressed('MOVE_LEFT') or Input.is_action_pressed('MOVE_RIGHT'):
+		speed += Accelaration
+		if speed > Maximum_Walk_Speed:
+			speed = Maximum_Walk_Speed
 
-	if not(Input.is_key_pressed(KEY_W) or Input.is_key_pressed(KEY_A) or Input.is_key_pressed(KEY_S) or Input.is_key_pressed(KEY_D)):
-		Walk_Speed = 0
+	if Input.is_action_pressed('MOVE_FORWARD'):
+		velocity.x = -global_transform.basis.z.x * speed
+		velocity.z = -global_transform.basis.z.z * speed
+	if Input.is_action_pressed('MOVE_BACKWARD'):
+		velocity.x = global_transform.basis.z.x * speed
+		velocity.z = global_transform.basis.z.z * speed
+	if Input.is_action_pressed('MOVE_LEFT'):
+		velocity.x = -global_transform.basis.x.x * speed
+		velocity.z = -global_transform.basis.x.z * speed
+	if Input.is_action_pressed('MOVE_RIGHT'):
+		velocity.x = global_transform.basis.x.x * speed
+		velocity.z = global_transform.basis.x.z * speed
+
+	if not(Input.is_action_pressed('MOVE_FORWARD') or Input.is_action_pressed('MOVE_BACKWARD') or Input.is_action_pressed('MOVE_LEFT') or Input.is_action_pressed('MOVE_RIGHT')):
+		speed = 0
 		velocity.x = 0
 		velocity.z = 0
 
 	if is_on_floor():
 		if Input.is_action_just_pressed("ui_accept"):
 			velocity.y = Jump_Speed
+
 	velocity = move_and_slide(velocity, Vector3(0,1,0))
 
 # Rotate X
