@@ -24,6 +24,17 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
+	current_time += delta
+
+	var bob_h = cos(current_time / deg2rad(20)) * abs(velocity.length() / max_walk_speed) * 32
+	var bob_v = sin(current_time / deg2rad(10)) * abs(velocity.length() / max_walk_speed) * 16
+
+	var weapon_x = 960 + bob_h
+	var weapon_y = 848 + bob_v
+
+	get_node("Weapon").position.x = weapon_x
+	get_node("Weapon").position.y = weapon_y
+
 	if exit_on_escape:
 		if Input.is_key_pressed(KEY_ESCAPE):
 			get_tree().quit()
@@ -71,16 +82,6 @@ func _physics_process(delta):
 	velocity.y = vy
 
 	velocity = move_and_slide(velocity, Vector3(0,1,0))
-
-	current_time += delta
-
-	var bob_h = cos(current_time / deg2rad(20)) * abs(velocity.length() / max_speed) * 32
-	var bob_v = sin(current_time / deg2rad(10)) * abs(velocity.length() / max_speed) * 16
-	var weapon_x = 960 + bob_h
-	var weapon_y = 848 + bob_v
-
-	get_node("Weapon").position.x = weapon_x
-	get_node("Weapon").position.y = weapon_y
 
 # Rotate X
 func _input(event):
