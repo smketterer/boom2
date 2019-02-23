@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://billboard.tres" type="Material" id=1]
-[ext_resource path="res://sprites/enemy0.png" type="Texture" id=2]
+[ext_resource path="res://sprites/enemy.png" type="Texture" id=2]
 
 [node name="EnemySprite3D" type="Sprite3D"]
 

@@ -16,10 +16,5 @@ func log(instance, text):
 	var seconds = timeDict.second;
 	var fmt = "[%02d:%02d:%02d] %s: %s"
 	var string = fmt % [hour, minute, seconds, instance.name, text]
-	self.append_bbcode(string)
+	self.add_text(string)
 	self.newline()
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass

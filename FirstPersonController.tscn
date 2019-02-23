@@ -63,8 +63,8 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0.05, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 12.5, 0.0 ]
+"update": 1,
+"values": [ 1.5, 0.0 ]
 }
 
 [node name="FirstPersonController" type="Spatial"]
@@ -96,7 +96,7 @@ max_walk_speed = 10.0
 walk_speed = 1.0
 max_run_speed = 17.5
 run_speed = 2.0
-jump_speed = 10.0
+jump_speed = 9.0
 GRAVITY = 0.5
 
 [node name="Camera" type="Camera" parent="Player" index="0"]
