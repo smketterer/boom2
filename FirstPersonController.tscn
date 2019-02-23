@@ -47,12 +47,24 @@ tracks/2/path = NodePath("../Camera:far")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0.05, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ 50.0, 25.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../OmniLight:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 12.5, 0.0 ]
 }
 
 [node name="FirstPersonController" type="Spatial" index="0"]
@@ -81,7 +93,7 @@ exit_on_escape = true
 max_y_look = 45
 friction = 0.95
 max_walk_speed = 10.0
-walk_speed = 1.5
+walk_speed = 1.0
 max_run_speed = 17.5
 run_speed = 2.0
 jump_speed = 10.0
@@ -146,12 +158,35 @@ _sections_unfolded = [ "Animation", "Flags", "Geometry", "LOD", "Pause", "Region
 
 [node name="Weapon" type="Sprite" parent="Player" index="3"]
 
-position = Vector2( 960, 888 )
-scale = Vector2( 12, 12 )
+position = Vector2( 960, 821.052 )
+scale = Vector2( 16, 16 )
 texture = ExtResource( 5 )
 _sections_unfolded = [ "Material", "Offset", "Transform", "Visibility", "Z Index" ]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player" index="4"]
+[node name="OmniLight" type="OmniLight" parent="Player" index="4"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+layers = 1
+light_color = Color( 1, 1, 1, 1 )
+light_energy = 0.0
+light_indirect_energy = 1.0
+light_negative = false
+light_specular = 0.5
+light_bake_mode = 1
+light_cull_mask = -1
+shadow_enabled = false
+shadow_color = Color( 0, 0, 0, 1 )
+shadow_bias = 0.15
+shadow_contact = 0.0
+shadow_reverse_cull_face = false
+editor_only = false
+omni_range = 25.0
+omni_attenuation = 1.0
+omni_shadow_mode = 1
+omni_shadow_detail = 1
+_sections_unfolded = [ "Light", "Omni" ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player" index="5"]
 
 root_node = NodePath("")
 autoplay = ""

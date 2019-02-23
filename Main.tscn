@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://gameboy_shader_material.tres" type="Material" id=1]
-[ext_resource path="res://default_env.tres" type="Environment" id=2]
-[ext_resource path="res://TestArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ViewportContainer.gd" type="Script" id=2]
+[ext_resource path="res://default_env.tres" type="Environment" id=3]
+[ext_resource path="res://TestArea.tscn" type="PackedScene" id=4]
 
 [sub_resource type="World" id=1]
 
-environment = ExtResource( 2 )
+environment = ExtResource( 3 )
 
 [node name="Spatial" type="Spatial"]
 
@@ -27,6 +28,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 stretch = true
 stretch_shrink = 1
+script = ExtResource( 2 )
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Theme" ]
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer" index="0"]
@@ -56,6 +58,6 @@ shadow_atlas_quad_2 = 3
 shadow_atlas_quad_3 = 4
 _sections_unfolded = [ "Audio Listener", "GUI", "Physics", "Render Target", "Rendering", "Shadow Atlas" ]
 
-[node name="TestArea" parent="ViewportContainer/Viewport" index="0" instance=ExtResource( 3 )]
+[node name="TestArea" parent="ViewportContainer/Viewport" index="0" instance=ExtResource( 4 )]
 
 

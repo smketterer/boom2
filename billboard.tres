@@ -34,7 +34,9 @@ roughness = 0.0
 roughness_texture_channel = 0
 emission_enabled = false
 normal_enabled = false
-rim_enabled = false
+rim_enabled = true
+rim = 1.0
+rim_tint = 1.0
 clearcoat_enabled = false
 anisotropy_enabled = false
 ao_enabled = false
@@ -53,5 +55,5 @@ uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
 proximity_fade_enable = false
 distance_fade_enable = false
-_sections_unfolded = [ "Albedo", "Flags", "Parameters", "Vertex Color" ]
+_sections_unfolded = [ "Albedo", "Flags", "Parameters", "Rim", "Vertex Color" ]
 

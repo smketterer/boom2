@@ -3,7 +3,7 @@
 [ext_resource path="res://billboard.tres" type="Material" id=1]
 [ext_resource path="res://sprites/enemy0.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape" id=1]
+[sub_resource type="CapsuleShape" id=4]
 
 radius = 1.0
 height = 1.0
@@ -45,7 +45,7 @@ _sections_unfolded = [ "Transform" ]
 [node name="EnemyCollisionShape" type="CollisionShape" parent="EnemyRigidBody" index="0"]
 
 transform = Transform( 1, 1.04302e-14, -4.5592e-22, 0, -4.37114e-08, -1, -1.04302e-14, 1, -4.37114e-08, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 disabled = false
 _sections_unfolded = [ "Transform" ]
 
@@ -70,7 +70,7 @@ opacity = 1.0
 pixel_size = 0.1
 axis = 2
 transparent = true
-shaded = false
+shaded = true
 double_sided = false
 alpha_cut = 0
 texture = ExtResource( 2 )
