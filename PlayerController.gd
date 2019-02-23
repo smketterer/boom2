@@ -19,6 +19,8 @@ var velocity = Vector3(0,0,0)
 var max_speed = max_walk_speed
 var current_time = 0
 
+onready var anim = get_node('AnimationPlayer')
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	set_process(true)
@@ -26,18 +28,25 @@ func _ready():
 func _process(delta):
 	current_time += delta
 
+	var weapon = get_node("Weapon")
 	var bob_h = cos(current_time / deg2rad(20)) * abs(velocity.length() / max_walk_speed) * 32
 	var bob_v = sin(current_time / deg2rad(10)) * abs(velocity.length() / max_walk_speed) * 16
-
 	var weapon_x = 960 + bob_h
-	var weapon_y = 848 + bob_v
+	var weapon_y = 936 + bob_v
 
-	get_node("Weapon").position.x = weapon_x
-	get_node("Weapon").position.y = weapon_y
+	weapon.position.x = weapon_x
+	weapon.position.y = weapon_y
+
+	if Input.is_action_just_pressed("SHOOT"):
+		anim.play('Shoot')
 
 	if exit_on_escape:
 		if Input.is_key_pressed(KEY_ESCAPE):
 			get_tree().quit()
+
+func _on_AnimationPlayer_animation_finished(animation):
+	if animation == 'Shoot':
+		anim.stop()
 
 func _physics_process(delta):
 	velocity.y -= GRAVITY

@@ -86,7 +86,7 @@ vertex_color_is_srgb = false
 params_diffuse_mode = 0
 params_specular_mode = 0
 params_blend_mode = 0
-params_cull_mode = 0
+params_cull_mode = 2
 params_depth_draw_mode = 0
 params_line_width = 1.0
 params_point_size = 1.0
@@ -121,7 +121,7 @@ uv2_triplanar = false
 uv2_triplanar_sharpness = 1.0
 proximity_fade_enable = false
 distance_fade_enable = false
-_sections_unfolded = [ "Albedo" ]
+_sections_unfolded = [ "Albedo", "Ambient Occlusion", "Anisotropy", "Clearcoat", "Depth", "Detail", "Distance Fade", "Emission", "Flags", "Metallic", "NormalMap", "Parameters", "Proximity Fade", "Refraction", "Rim", "Roughness", "Subsurf Scatter", "Transmission", "UV1", "UV2", "Vertex Color" ]
 
 [sub_resource type="PlaneMesh" id=5]
 
@@ -135,7 +135,7 @@ subdivide_depth = 0
 
 data = PoolVector3Array( 2, 0, 2, -2, 0, 2, 2, 0, -2, -2, 0, 2, -2, 0, -2, 2, 0, -2 )
 
-[node name="Spatial" type="Spatial" index="0"]
+[node name="Spatial" type="Spatial"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
 
@@ -188,7 +188,7 @@ lod_max_hysteresis = 0.0
 mesh = SubResource( 5 )
 skeleton = NodePath("..")
 material/0 = null
-_sections_unfolded = [ "Geometry" ]
+_sections_unfolded = [ "Geometry", "LOD", "Transform", "Visibility", "material" ]
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance2" index="0"]
 
