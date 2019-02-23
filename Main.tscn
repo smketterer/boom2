@@ -1,15 +1,16 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://gameboy_shader_material.tres" type="Material" id=1]
 [ext_resource path="res://ViewportContainer.gd" type="Script" id=2]
 [ext_resource path="res://default_env.tres" type="Environment" id=3]
-[ext_resource path="res://TestArea.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Console.gd" type="Script" id=4]
+[ext_resource path="res://TestArea.tscn" type="PackedScene" id=5]
 
 [sub_resource type="World" id=1]
 
 environment = ExtResource( 3 )
 
-[node name="Spatial" type="Spatial"]
+[node name="Main" type="Spatial" index="0"]
 
 [node name="ViewportContainer" type="ViewportContainer" parent="." index="0"]
 
@@ -58,6 +59,56 @@ shadow_atlas_quad_2 = 3
 shadow_atlas_quad_3 = 4
 _sections_unfolded = [ "Audio Listener", "GUI", "Physics", "Render Target", "Rendering", "Shadow Atlas" ]
 
-[node name="TestArea" parent="ViewportContainer/Viewport" index="0" instance=ExtResource( 4 )]
+[node name="ColorRect" type="ColorRect" parent="ViewportContainer/Viewport" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 960.0
+margin_top = 540.0
+margin_right = 961.0
+margin_bottom = 541.0
+rect_scale = Vector2( 5, 5 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 1, 1, 1 )
+_sections_unfolded = [ "Anchor", "Focus", "Hint", "Margin", "Mouse", "Rect" ]
+
+[node name="Console" type="RichTextLabel" parent="ViewportContainer/Viewport" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 37.0
+margin_top = 30.0
+margin_right = 586.0
+margin_bottom = 256.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+bbcode_enabled = true
+bbcode_text = ""
+visible_characters = -1
+percent_visible = 1.0
+meta_underlined = true
+tab_size = 4
+text = ""
+scroll_active = false
+scroll_following = true
+selection_enabled = false
+override_selected_font_color = false
+script = ExtResource( 4 )
+_sections_unfolded = [ "BBCode" ]
+
+[node name="TestArea" parent="ViewportContainer/Viewport" index="2" instance=ExtResource( 5 )]
 
 

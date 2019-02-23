@@ -135,7 +135,7 @@ subdivide_depth = 0
 
 data = PoolVector3Array( 2, 0, 2, -2, 0, 2, 2, 0, -2, -2, 0, 2, -2, 0, -2, 2, 0, -2 )
 
-[node name="Spatial" type="Spatial"]
+[node name="MeshLibrary" type="Spatial"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
 

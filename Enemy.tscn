@@ -1,14 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://billboard.tres" type="Material" id=1]
-[ext_resource path="res://sprites/enemy0.png" type="Texture" id=2]
+[ext_resource path="res://EnemyRigidBody.gd" type="Script" id=1]
+[ext_resource path="res://billboard.tres" type="Material" id=2]
+[ext_resource path="res://sprites/enemy0.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape" id=4]
 
 radius = 1.0
 height = 1.0
 
-[node name="Enemy" type="Spatial" index="0"]
+[node name="Enemy" type="Spatial"]
 
 _sections_unfolded = [ "Transform", "Visibility" ]
 
@@ -40,6 +41,7 @@ linear_velocity = Vector3( 0, 0, 0 )
 linear_damp = -1.0
 angular_velocity = Vector3( 0, 0, 0 )
 angular_damp = -1.0
+script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="EnemyCollisionShape" type="CollisionShape" parent="EnemyRigidBody" index="0"]
@@ -53,7 +55,7 @@ _sections_unfolded = [ "Transform" ]
 
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.0588868, 0 )
 layers = 1
-material_override = ExtResource( 1 )
+material_override = ExtResource( 2 )
 cast_shadow = 0
 extra_cull_margin = 0.0
 use_in_baked_light = false
@@ -73,7 +75,7 @@ transparent = true
 shaded = true
 double_sided = false
 alpha_cut = 0
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 vframes = 1
 hframes = 1
 frame = 0

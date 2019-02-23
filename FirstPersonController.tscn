@@ -39,7 +39,7 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0.05, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ Vector2( 0, 1 ), Vector2( 0, 0 ) ]
 }
 tracks/2/type = "value"
@@ -67,7 +67,7 @@ tracks/3/keys = {
 "values": [ 12.5, 0.0 ]
 }
 
-[node name="FirstPersonController" type="Spatial" index="0"]
+[node name="FirstPersonController" type="Spatial"]
 
 _sections_unfolded = [ "Transform" ]
 
@@ -115,6 +115,14 @@ size = 1.0
 near = 0.05
 far = 25.0
 script = ExtResource( 2 )
+
+[node name="RayCast" type="RayCast" parent="Player/Camera" index="0"]
+
+enabled = true
+exclude_parent = true
+cast_to = Vector3( 0, 0, -25 )
+collision_mask = 1
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="CollisionShape" type="CollisionShape" parent="Player" index="1"]
 

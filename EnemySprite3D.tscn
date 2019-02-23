@@ -3,7 +3,7 @@
 [ext_resource path="res://billboard.tres" type="Material" id=1]
 [ext_resource path="res://sprites/enemy0.png" type="Texture" id=2]
 
-[node name="EnemySprite3D" type="Sprite3D" index="0"]
+[node name="EnemySprite3D" type="Sprite3D"]
 
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.0588868, 0 )
 layers = 1

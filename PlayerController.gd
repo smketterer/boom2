@@ -20,6 +20,7 @@ var max_speed = max_walk_speed
 var current_time = 0
 
 onready var anim = get_node('AnimationPlayer')
+onready var ray = get_node('Camera').get_node('RayCast')
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -39,6 +40,11 @@ func _process(delta):
 
 	if Input.is_action_just_pressed("SHOOT"):
 		anim.play('Shoot')
+		ray.force_raycast_update()
+		if ray.is_colliding():
+				var body = ray.get_collider()
+				if body.has_method("damage"):
+						body.damage(5, ray.global_transform)
 
 	if exit_on_escape:
 		if Input.is_key_pressed(KEY_ESCAPE):
