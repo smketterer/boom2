@@ -11,16 +11,20 @@ export var walk_speed = 1.0
 export var max_run_speed = 17.5
 export var run_speed = 2.0
 export var jump_speed = 10.0
-
-export var GRAVITY = 0.5
+export var gravity = 0.5
 
 var acceleration = Vector3(walk_speed, jump_speed, walk_speed)
 var velocity = Vector3(0,0,0)
 var max_speed = max_walk_speed
 var current_time = 0
+var next_weapon
 
-onready var anim = get_node('AnimationPlayer')
-onready var ray = get_node('Camera').get_node('RayCast')
+onready var weapon = get_node("Camera/Weapon")
+onready var current_weapon = weapon.get_node('Pistol')
+onready var anim = current_weapon.get_node('AnimationPlayer')
+onready var ray = get_node('Camera/RayCast')
+
+onready var console = get_tree().get_root().get_node("Main/ViewportContainer/Viewport/Console")
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -29,33 +33,60 @@ func _ready():
 func _process(delta):
 	current_time += delta
 
-	var weapon = get_node("Weapon")
 	var bob_h = cos(current_time / deg2rad(20)) * abs(velocity.length() / max_walk_speed) * 32
 	var bob_v = sin(current_time / deg2rad(10)) * abs(velocity.length() / max_walk_speed) * 16
-	var weapon_x = 960 + bob_h
-	var weapon_y = 936 + bob_v
+	weapon.position.x = bob_h
+	weapon.position.y = bob_v
 
-	weapon.position.x = weapon_x
-	weapon.position.y = weapon_y
-
-	if Input.is_action_just_pressed("SHOOT"):
-		anim.play('Shoot')
-		ray.force_raycast_update()
-		if ray.is_colliding():
-				var body = ray.get_collider()
-				if body.has_method("damage"):
-						body.damage(5, ray.global_transform)
+	if Input.is_action_pressed("SHOOT") and not anim.is_playing():
+		self.shoot()
 
 	if exit_on_escape:
 		if Input.is_key_pressed(KEY_ESCAPE):
 			get_tree().quit()
 
+	if Input.is_key_pressed(KEY_1) and not anim.is_playing() and not current_weapon.name == 'Pistol':
+		switch_weapon('Pistol')
+
+	if Input.is_key_pressed(KEY_2) and not anim.is_playing() and not current_weapon.name == 'ChainGun':
+		switch_weapon('ChainGun')
+
+func switch_weapon(weapon_node):
+	# for N in weapon.get_children():
+	# 	N.visible = false
+	current_weapon.get_node('AnimationPlayer').play('Holster')
+	next_weapon = weapon_node
+
+func shoot():
+	anim.play('Shoot')
+	ray.force_raycast_update()
+	if ray.is_colliding():
+			var body = ray.get_collider()
+			if body.has_method("damage"):
+					body.damage(5, ray.global_transform)
+
 func _on_AnimationPlayer_animation_finished(animation):
-	if animation == 'Shoot':
-		anim.stop()
+	# console.log(self, "Animation stopped %s" % animation)
+	# console.log(self, "Current weapon %s" % current_weapon.name)
+	if animation == "Holster":
+		current_weapon.visible = false
+		current_weapon = weapon.get_node(next_weapon)
+		current_weapon.visible = true
+		anim = current_weapon.get_node('AnimationPlayer')
+		anim.play('Draw')
+	if animation == "Shoot":
+		if Input.is_key_pressed(KEY_1) and not current_weapon.name == 'Pistol':
+			switch_weapon('Pistol')
+			return
+		if Input.is_key_pressed(KEY_2) and not current_weapon.name == 'ChainGun':
+			switch_weapon('ChainGun')
+			return
+		if Input.is_action_pressed("SHOOT"):
+			self.shoot()
+			return
 
 func _physics_process(delta):
-	velocity.y -= GRAVITY
+	velocity.y -= gravity
 
 	if Input.is_key_pressed(KEY_SHIFT):
 		acceleration = Vector3(run_speed, jump_speed, run_speed)
