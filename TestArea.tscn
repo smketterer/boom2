@@ -71,10 +71,11 @@ _sections_unfolded = [ "Resource" ]
 
 points = PoolVector3Array( 4, 0, 4, -4, 0, 4, 4, 0, -4, -4, 0, -4 )
 
-[node name="TestArea" type="Spatial"]
+[node name="TestArea" type="Spatial" index="0"]
 
 [node name="MeshInstance" type="MeshInstance" parent="." index="0"]
 
+editor/display_folded = true
 transform = Transform( 0.863653, 0.504086, 0, -0.504086, 0.863653, 0, 0, 0, 1, -6.58125, 2, 5.98215 )
 layers = 1
 material_override = null
@@ -111,19 +112,19 @@ disabled = false
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6 )
 
-[node name="EnemyRigidBody2" parent="." index="2" instance=ExtResource( 3 )]
+[node name="EnemyRigidBody3" parent="." index="2" instance=ExtResource( 3 )]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -7 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -7 )
 
-[node name="EnemyRigidBody3" parent="." index="3" instance=ExtResource( 3 )]
+[node name="Navigation" type="Navigation" parent="." index="3"]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -6 )
+up_vector = Vector3( 0, 1, 0 )
 
-[node name="Walls" type="GridMap" parent="." index="4"]
+[node name="Walls" type="GridMap" parent="Navigation" index="0"]
 
 theme = ExtResource( 4 )
 cell_size = Vector3( 4, 4, 4 )
-cell_octant_size = 4
+cell_octant_size = 16
 cell_center_x = false
 cell_center_y = true
 cell_center_z = false
@@ -131,7 +132,7 @@ cell_scale = 1.0
 collision_layer = 1
 collision_mask = 1
 data = {
-"cells": PoolIntArray( 3, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 3, 1, 1073741824, 65533, 1, 0, 3, 2, 0, 65533, 2, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 65533, 3, 0, 65534, 3, 0, 65535, 3, -536870912, 0, 65533, 0, 1, 65533, 0, 2, 65533, 0, 3, 65533, 0, 65533, 65533, 0, 65534, 65533, 1073741824, 65535, 65533, 0, 3, 65534, 0, 65533, 65534, 0, 3, 65535, 0, 65533, 65535, 0 )
+"cells": PoolIntArray( 3, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 3, 1, 0, 65533, 1, 0, 3, 2, 0, 65533, 2, 0, 0, 3, 0, 1, 3, 0, 2, 3, 0, 3, 3, 0, 65533, 3, 0, 65534, 3, 0, 65535, 3, 0, 0, 65533, 0, 1, 65533, -1610612736, 2, 65533, 0, 3, 65533, 0, 65533, 65533, 0, 65534, 65533, 0, 65535, 65533, 0, 3, 65534, 0, 65533, 65534, 0, 3, 65535, 0, 65533, 65535, 0 )
 }
 _sections_unfolded = [ "Cell", "Collision", "Transform", "Visibility" ]
 __meta__ = {
@@ -139,8 +140,9 @@ __meta__ = {
 "_editor_floor_": Vector3( 0, 0, 0 )
 }
 
-[node name="Floors" type="GridMap" parent="." index="5"]
+[node name="Floors" type="GridMap" parent="Navigation" index="1"]
 
+visible = false
 theme = ExtResource( 4 )
 cell_size = Vector3( 4, 4, 4 )
 cell_octant_size = 16
@@ -151,15 +153,15 @@ cell_scale = 1.0
 collision_layer = 1
 collision_mask = 1
 data = {
-"cells": PoolIntArray( 0, 0, 1048577, 1, 0, -1609564159, 2, 0, 1048577, 65534, 0, 1048577, 65535, 0, 1048577, 65536, 0, 1, 65537, 0, 1, 65538, 0, 536870913, 0, 1, 1048577, 1, 1, -2146435071, 2, 1, 1048577, 65534, 1, 1048577, 65535, 1, 1048577, 65536, 1, 1, 65537, 1, 1, 65538, 1, 1, 0, 2, 1048577, 1, 2, 1048577, 2, 2, 1048577, 65534, 2, 1048577, 65535, 2, 1048577, 65536, 2, 1, 65537, 2, 536870913, 65538, 2, 1, 0, 65534, 1048577, 1, 65534, 1048577, 2, 65534, 1048577, 65534, 65534, 1048577, 65535, 65534, 1048577, 65536, 65534, 1, 65537, 65534, 1, 65538, 65534, 1, 131070, 65534, 1, 131071, 65534, 1, 0, 65535, 537919489, 1, 65535, 1048577, 2, 65535, 1048577, 65534, 65535, 1048577, 65535, 65535, 1048577, 65536, 65535, 1, 65537, 65535, 1, 65538, 65535, 1, 131070, 65535, 1, 131071, 65535, 1 )
+"cells": PoolIntArray( 0, 0, 1048577, 1, 0, 1048577, 2, 0, 1048577, 65534, 0, 1048577, 65535, 0, 1048577, 65536, 0, 1, 65537, 0, 1, 65538, 0, 1, 0, 1, 1048577, 1, 1, 1048577, 2, 1, 1048577, 65534, 1, 1048577, 65535, 1, 537919489, 65536, 1, 536870913, 65537, 1, 1, 65538, 1, 1, 0, 2, 1048577, 1, 2, 1048577, 2, 2, 1048577, 65534, 2, 1048577, 65535, 2, 1074790401, 65536, 2, 1, 65537, 2, 1, 65538, 2, 1, 0, 65534, 1048577, 1, 65534, 1048577, 2, 65534, 1048577, 65534, 65534, 1048577, 65535, 65534, 1048577, 65536, 65534, 1, 65537, 65534, 1, 65538, 65534, 1, 131070, 65534, 1, 131071, 65534, 1, 0, 65535, 1048577, 1, 65535, 1048577, 2, 65535, 1048577, 65534, 65535, 1048577, 65535, 65535, 1048577, 65536, 65535, 536870913, 65537, 65535, 1, 65538, 65535, 1, 131070, 65535, 1, 131071, 65535, 1 )
 }
-_sections_unfolded = [ "Cell" ]
+_sections_unfolded = [ "Cell", "Collision" ]
 __meta__ = {
 "_editor_clip_": 0,
 "_editor_floor_": Vector3( 0, 1, 0 )
 }
 
-[node name="OmniLight" type="OmniLight" parent="." index="6"]
+[node name="OmniLight" type="OmniLight" parent="." index="4"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 2, 0 )
 layers = 1
@@ -182,7 +184,7 @@ omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Omni" ]
 
-[node name="OmniLight2" type="OmniLight" parent="." index="7"]
+[node name="OmniLight2" type="OmniLight" parent="." index="5"]
 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 4, -6 )
 layers = 1
@@ -204,5 +206,10 @@ omni_attenuation = 1.0
 omni_shadow_mode = 1
 omni_shadow_detail = 1
 _sections_unfolded = [ "Light", "Omni" ]
+
+[node name="Spatial" type="Spatial" parent="." index="6"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6 )
+_sections_unfolded = [ "Transform" ]
 
 

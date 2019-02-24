@@ -52,8 +52,6 @@ func _process(delta):
 		switch_weapon('ChainGun')
 
 func switch_weapon(weapon_node):
-	# for N in weapon.get_children():
-	# 	N.visible = false
 	current_weapon.get_node('AnimationPlayer').play('Holster')
 	next_weapon = weapon_node
 
