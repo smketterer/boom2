@@ -2,7 +2,7 @@ extends KinematicBody
 
 var hp = 10
 var path = PoolVector3Array([])
-var speed = .25
+var speed = .3
 
 onready var console = get_tree().get_root().get_node("Main/ViewportContainer/Viewport/Console")
 onready var nav = get_node("../../Navigation")
