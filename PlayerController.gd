@@ -86,7 +86,7 @@ func _on_AnimationPlayer_animation_finished(animation):
 func _physics_process(delta):
 	velocity.y -= gravity
 
-	if Input.is_key_pressed(KEY_SHIFT):
+	if Input.is_key_pressed(KEY_SHIFT) and is_on_floor():
 		acceleration = Vector3(run_speed, jump_speed, run_speed)
 		max_speed = max_run_speed
 		# get_node("Camera").fov = 65

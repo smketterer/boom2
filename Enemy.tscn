@@ -8,7 +8,7 @@
 radius = 1.0
 height = 1.0
 
-[node name="Enemy" type="Spatial" index="0"]
+[node name="Enemy" type="Spatial"]
 
 _sections_unfolded = [ "Transform", "Visibility" ]
 
