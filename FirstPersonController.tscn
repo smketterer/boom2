@@ -222,6 +222,7 @@ size = 1.0
 near = 0.05
 far = 25.0
 script = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="Weapon" type="Node2D" parent="Player/Camera" index="0"]
 
