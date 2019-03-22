@@ -16,3 +16,4 @@ func _input(event):
 		if INVERSION_MULT * self.get_parent().sensitivity_y * event.relative.y <= 0  and self.rotation_degrees.x <= -self.get_parent().max_y_look:
 			return
 		rotate_x(INVERSION_MULT * self.get_parent().sensitivity_y * event.relative.y)
+		self.get_parent().ray.rotate_x(INVERSION_MULT * self.get_parent().sensitivity_y * event.relative.y)

@@ -19,7 +19,7 @@ func follow():
 		path = self.get_path(path_begin, path_end)
 		path.remove(0)
 		# Check for path distance to prevent jiggle at the end.
-		# Code goes here.
+		# CODE GOES HERE
 	else:
 		var path_to = path[0] - path_begin
 		if path_to.length() > 1:

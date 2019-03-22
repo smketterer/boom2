@@ -20,7 +20,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -17 )
 
 [node name="Navigation" type="Navigation" parent="." index="3"]
 
-editor/display_folded = true
 up_vector = Vector3( 0, 1, 0 )
 
 [node name="Walls" type="GridMap" parent="Navigation" index="0"]
@@ -45,6 +44,7 @@ __meta__ = {
 
 [node name="Floors" type="GridMap" parent="Navigation" index="1"]
 
+visible = false
 theme = ExtResource( 3 )
 cell_size = Vector3( 4, 4, 4 )
 cell_octant_size = 16
