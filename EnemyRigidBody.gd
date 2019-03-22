@@ -1,8 +1,8 @@
 extends KinematicBody
 
-var hp = 10
+export var hp = 10
+export var speed = 4
 var path = PoolVector3Array([])
-var speed = .3
 
 onready var console = get_tree().get_root().get_node("Main/ViewportContainer/Viewport/Console")
 onready var nav = get_node("../../Navigation")
@@ -18,11 +18,13 @@ func follow():
 		path = PoolVector3Array([])
 		path = self.get_path(path_begin, path_end)
 		path.remove(0)
+		# Check for path distance to prevent jiggle at the end.
+		# Code goes here.
 	else:
 		var path_to = path[0] - path_begin
-		self.move_and_slide(path_to.normalized() * speed, Vector3(0,1,0))
-		if path_to.length() < 2:
-			console.log(self, path)
+		if path_to.length() > 1:
+			self.move_and_slide(path_to.normalized() * speed, Vector3(0,1,0))
+		else:
 			path.remove(0)
 
 func _process(delta):

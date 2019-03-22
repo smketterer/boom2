@@ -10,7 +10,7 @@
 
 environment = ExtResource( 3 )
 
-[node name="Main" type="Spatial" index="0"]
+[node name="Main" type="Spatial"]
 
 [node name="ViewportContainer" type="ViewportContainer" parent="." index="0"]
 

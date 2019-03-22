@@ -27,6 +27,8 @@ axis_lock_angular_z = false
 collision/safe_margin = 0.001
 script = ExtResource( 1 )
 _sections_unfolded = [ "Axis Lock", "Collision", "Transform", "collision" ]
+hp = 10
+speed = 4
 
 [node name="EnemyCollisionShape" type="CollisionShape" parent="EnemyKinematicBody" index="0"]
 

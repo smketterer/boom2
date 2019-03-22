@@ -51,6 +51,9 @@ func _process(delta):
 	if Input.is_key_pressed(KEY_2) and not anim.is_playing() and not current_weapon.name == 'ChainGun':
 		switch_weapon('ChainGun')
 
+	if Input.is_key_pressed(KEY_3) and not anim.is_playing() and not current_weapon.name == 'Shotgun':
+		switch_weapon('Shotgun')
+
 func switch_weapon(weapon_node):
 	current_weapon.get_node('AnimationPlayer').play('Holster')
 	next_weapon = weapon_node
