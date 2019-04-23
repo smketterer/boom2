@@ -25,7 +25,7 @@ var next_weapon
 onready var weapon = get_node("Camera/Weapon")
 onready var current_weapon = weapon.get_node('Pistol')
 onready var anim = current_weapon.get_node('AnimationPlayer')
-onready var ray = current_weapon.get_node('RayCast')
+onready var ray = get_node('Camera/RayCast')
 
 onready var console = get_tree().get_root().get_node("Main/ViewportContainer/Viewport/Console")
 
@@ -63,10 +63,6 @@ func switch_weapon(weapon_node):
 
 func shoot():
 	anim.play('Shoot')
-	ray = current_weapon.get_node('RayCast')
-	console.log(self, ray)
-	console.log(self, ray.rotation)
-	console.log(self, self.get_node("Camera").rotation)
 	ray.force_raycast_update()
 	if ray.is_colliding():
 			var body = ray.get_collider()
@@ -74,8 +70,6 @@ func shoot():
 					body.damage(5, ray.global_transform)
 
 func _on_AnimationPlayer_animation_finished(animation):
-	console.log(self, "Animation stopped %s" % animation)
-	console.log(self, "Current weapon %s" % current_weapon.name)
 	if animation == "Holster":
 		current_weapon.visible = false
 		current_weapon = weapon.get_node(next_weapon)
@@ -141,4 +135,3 @@ func _physics_process(delta):
 func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(-sensitivity_x * event.relative.x)
-		ray.rotate_y(-sensitivity_x * event.relative.x)

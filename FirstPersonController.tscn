@@ -308,7 +308,15 @@ far = 25.0
 script = ExtResource( 2 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
-[node name="Weapon" type="Node2D" parent="Player/Camera" index="0"]
+[node name="RayCast" type="RayCast" parent="Player/Camera" index="0"]
+
+enabled = true
+exclude_parent = true
+cast_to = Vector3( 0, 0, -25 )
+collision_mask = 1
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Weapon" type="Node2D" parent="Player/Camera" index="1"]
 
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
 
@@ -332,15 +340,6 @@ anims/Shoot = SubResource( 3 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[node name="RayCast" type="RayCast" parent="Player/Camera/Weapon/Pistol" index="1"]
-
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-enabled = true
-exclude_parent = true
-cast_to = Vector3( 0, 0, -25 )
-collision_mask = 1
-_sections_unfolded = [ "Transform", "Visibility" ]
-
 [node name="ChainGun" type="Sprite" parent="Player/Camera/Weapon" index="1"]
 
 visible = false
@@ -361,15 +360,6 @@ anims/Holster = SubResource( 5 )
 anims/Shoot = SubResource( 6 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
-
-[node name="RayCast" type="RayCast" parent="Player/Camera/Weapon/ChainGun" index="1"]
-
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-enabled = true
-exclude_parent = true
-cast_to = Vector3( 0, 0, -25 )
-collision_mask = 1
-_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="Shotgun" type="Sprite" parent="Player/Camera/Weapon" index="2"]
 
@@ -392,16 +382,7 @@ anims/Shoot = SubResource( 9 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
-[node name="RayCast" type="RayCast" parent="Player/Camera/Weapon/Shotgun" index="1"]
-
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-enabled = true
-exclude_parent = true
-cast_to = Vector3( 0, 0, -25 )
-collision_mask = 1
-_sections_unfolded = [ "Transform", "Visibility" ]
-
-[node name="MuzzleFlash" type="OmniLight" parent="Player/Camera" index="1"]
+[node name="MuzzleFlash" type="OmniLight" parent="Player/Camera" index="2"]
 
 layers = 1
 light_color = Color( 1, 1, 1, 1 )

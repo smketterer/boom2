@@ -44,7 +44,6 @@ __meta__ = {
 
 [node name="Floors" type="GridMap" parent="Navigation" index="1"]
 
-visible = false
 theme = ExtResource( 3 )
 cell_size = Vector3( 4, 4, 4 )
 cell_octant_size = 16
