@@ -16,28 +16,28 @@ vec4 grayscale(vec4 color) {
 
 vec4 colorize(vec4 color) {
 	// Colorizes the grayscale pixel
-    vec4 grayscale = color;
-	vec4 new_color = grayscale;
+    vec4 grayscale_ = color;
+	vec4 new_color = grayscale_;
 	
-    if (grayscale.r >= 0.0)
+    if (grayscale_.r >= 0.0)
     {
         // Set darkest color 4
         new_color = color_4;
                  
         // Color greater than (default) 0.25 in value? 
-        if(grayscale.r > offset * 0.5)
+        if(grayscale_.r > offset * 0.5)
         {
             // Set dark color 3
             new_color = color_3;
              
             // Color greater than (default) 0.50 in value? 
-            if(grayscale.r > offset)
+            if(grayscale_.r > offset)
             {
                 // Set bright color 2
                 new_color = color_2;
                  
                 // Color greater than (default) 0.75 in value? 
-                if(grayscale.r > offset * 1.5)
+                if(grayscale_.r > offset * 1.5)
                 {
                     // Set brightest color 1
                     new_color = color_1;

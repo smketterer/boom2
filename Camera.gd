@@ -1,6 +1,6 @@
 extends Camera
 
-const INVERSION_MULT = 1
+var INVERSION_MULT = 1
 
 func _ready():
 	if self.get_parent().invert_y_axis:
