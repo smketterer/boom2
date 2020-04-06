@@ -22,6 +22,7 @@ var max_speed = max_walk_speed
 var current_time = 0
 var next_weapon
 
+onready var camera = get_node("Camera")
 onready var weapon = get_node("Camera/Weapon")
 onready var current_weapon = weapon.get_node('Pistol')
 onready var anim = current_weapon.get_node('AnimationPlayer')
@@ -31,6 +32,7 @@ onready var console = get_tree().get_root().get_node("Main/ViewportContainer/Vie
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	anim.play('Draw')
 	set_process(true)
 
 func _process(delta):
@@ -40,6 +42,9 @@ func _process(delta):
 	var bob_v = sin(current_time / deg2rad(10)) * abs(velocity.length() / max_walk_speed) * 16
 	weapon.position.x = bob_h
 	weapon.position.y = bob_v
+	
+	if is_on_floor():
+		camera.transform.origin.y = 3 - (bob_v * .015)
 
 	if Input.is_action_pressed("SHOOT") and not anim.is_playing():
 		self.shoot()
@@ -93,11 +98,9 @@ func _physics_process(delta):
 	if Input.is_key_pressed(KEY_SHIFT) and is_on_floor():
 		acceleration = Vector3(run_speed, jump_speed, run_speed)
 		max_speed = max_run_speed
-		# get_node("Camera").fov = 65
 	else:
 		acceleration = Vector3(walk_speed, jump_speed, walk_speed)
 		max_speed = max_walk_speed
-		# get_node("Camera").fov = 70
 
 	if Input.is_action_pressed('MOVE_FORWARD'):
 		velocity.x += -global_transform.basis.z.x * acceleration.x
