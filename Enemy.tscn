@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://EnemyRigidBody.gd" type="Script" id=1]
-[ext_resource path="res://EnemySprite3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/enemy.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -14,8 +14,11 @@ script = ExtResource( 1 )
 transform = Transform( 1, -6.51683e-07, -5.30863e-14, 5.30863e-14, 1.62921e-07, -1, 6.51683e-07, 1, 1.62921e-07, 0, 1.5, 0 )
 shape = SubResource( 1 )
 
-[node name="EnemySprite3D" parent="EnemyKinematicBody" instance=ExtResource( 2 )]
-transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 1.5, 0 )
+[node name="Sprite3D" type="Sprite3D" parent="EnemyKinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+pixel_size = 0.1
+billboard = 2
+texture = ExtResource( 2 )
 
 [node name="Draw" type="ImmediateGeometry" parent="."]
 visible = false
