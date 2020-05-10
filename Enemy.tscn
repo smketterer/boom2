@@ -18,6 +18,8 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
 pixel_size = 0.1
 billboard = 2
+shaded = true
+double_sided = false
 texture = ExtResource( 2 )
 
 [node name="Draw" type="ImmediateGeometry" parent="."]

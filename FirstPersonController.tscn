@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Camera.gd" type="Script" id=2]
@@ -8,8 +8,6 @@
 [ext_resource path="res://sprites/chaingun-firing.png" type="Texture" id=6]
 [ext_resource path="res://sprites/shotgun.png" type="Texture" id=7]
 [ext_resource path="res://sprites/shotgun-firing.png" type="Texture" id=8]
-[ext_resource path="res://billboard.tres" type="Material" id=9]
-[ext_resource path="res://sprites/enemy0.png" type="Texture" id=10]
 [ext_resource path="res://Pistol.gd" type="Script" id=11]
 [ext_resource path="res://ChainGun.gd" type="Script" id=12]
 [ext_resource path="res://Shotgun.gd" type="Script" id=13]
@@ -306,15 +304,6 @@ omni_range = 25.0
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
 transform = Transform( 0.5, 0, 0, 0, 0, -1, 0, 0.5, 0, 0, 1.5, 0 )
 shape = SubResource( 10 )
-
-[node name="CharacterSprite" type="Sprite3D" parent="Player"]
-transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.6, 0 )
-visible = false
-material_override = ExtResource( 9 )
-cast_shadow = 0
-pixel_size = 0.1
-double_sided = false
-texture = ExtResource( 10 )
 [connection signal="animation_finished" from="Player/Camera/Weapon/Pistol/AnimationPlayer" to="Player" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="Player/Camera/Weapon/ChainGun/AnimationPlayer" to="Player" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="Player/Camera/Weapon/Shotgun/AnimationPlayer" to="Player" method="_on_AnimationPlayer_animation_finished"]
