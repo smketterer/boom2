@@ -8,9 +8,9 @@
 [ext_resource path="res://sprites/chaingun-firing.png" type="Texture" id=6]
 [ext_resource path="res://sprites/shotgun.png" type="Texture" id=7]
 [ext_resource path="res://sprites/shotgun-firing.png" type="Texture" id=8]
-[ext_resource path="res://Pistol.gd" type="Script" id=11]
-[ext_resource path="res://ChainGun.gd" type="Script" id=12]
-[ext_resource path="res://Shotgun.gd" type="Script" id=13]
+[ext_resource path="res://weapons/Pistol.gd" type="Script" id=11]
+[ext_resource path="res://weapons/ChainGun.gd" type="Script" id=12]
+[ext_resource path="res://weapons/Shotgun.gd" type="Script" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Draw"

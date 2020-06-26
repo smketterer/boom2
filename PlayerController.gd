@@ -95,12 +95,15 @@ func _on_AnimationPlayer_animation_finished(animation):
 func _physics_process(delta):
 	velocity.y -= gravity
 
-	if Input.is_key_pressed(KEY_SHIFT) and is_on_floor():
-		acceleration = Vector3(run_speed, jump_speed, run_speed)
-		max_speed = max_run_speed
-	else:
-		acceleration = Vector3(walk_speed, jump_speed, walk_speed)
-		max_speed = max_walk_speed
+	#if Input.is_key_pressed(KEY_SHIFT) and is_on_floor():
+	#	acceleration = Vector3(run_speed, jump_speed, run_speed)
+	#	max_speed = max_run_speed
+	#else:
+	#	acceleration = Vector3(walk_speed, jump_speed, walk_speed)
+	#	max_speed = max_walk_speed
+	
+	acceleration = Vector3(run_speed, jump_speed, run_speed)
+	max_speed = max_run_speed
 
 	if Input.is_action_pressed('MOVE_FORWARD'):
 		velocity.x += -global_transform.basis.z.x * acceleration.x
@@ -114,10 +117,6 @@ func _physics_process(delta):
 	if Input.is_action_pressed('MOVE_RIGHT'):
 		velocity.x += global_transform.basis.x.x * acceleration.x
 		velocity.z += global_transform.basis.x.z * acceleration.z
-
-	if is_on_floor():
-		if Input.is_action_just_pressed("ui_accept"):
-			velocity.y = acceleration.y
 
 	# Apply friction and cap speeds.
 	velocity.x *= friction

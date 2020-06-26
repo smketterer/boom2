@@ -32,6 +32,7 @@ render_target_update_mode = 3
 audio_listener_enable_3d = true
 
 [node name="CrossHair" type="ColorRect" parent="ViewportContainer/Viewport"]
+visible = false
 margin_left = 960.0
 margin_top = 540.0
 margin_right = 961.0
