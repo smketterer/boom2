@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sndDoorClose.ogg-364c7016ad6ee1bc8f5221e8cd730c6a.oggstr"
+
+[deps]
+
+source_file="res://sounds/sndDoorClose.ogg"
+dest_files=[ "res://.import/sndDoorClose.ogg-364c7016ad6ee1bc8f5221e8cd730c6a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

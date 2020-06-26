@@ -6,7 +6,7 @@ extends ViewportContainer
 
 
 func _ready():
-	OS.set_window_fullscreen(true)
+	# OS.set_window_fullscreen(true)
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	pass

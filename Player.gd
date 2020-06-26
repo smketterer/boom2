@@ -30,12 +30,17 @@ onready var ray = get_node('Camera/RayCast')
 
 onready var console = get_tree().get_root().get_node("Main/ViewportContainer/Viewport/Console")
 
+slave var slave_transform = Vector3()
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	anim.play('Draw')
 	set_process(true)
 
 func _process(delta):
+	if Input.is_action_pressed("QUIT"):
+		get_tree().quit()
+	
 	current_time += delta
 
 	var bob_h = cos(current_time / deg2rad(20)) * abs(velocity.length() / max_walk_speed) * 32
@@ -49,10 +54,6 @@ func _process(delta):
 	if Input.is_action_pressed("SHOOT") and not anim.is_playing():
 		self.shoot()
 
-	if exit_on_escape:
-		if Input.is_key_pressed(KEY_ESCAPE):
-			get_tree().quit()
-
 	if Input.is_key_pressed(KEY_1) and not anim.is_playing() and not current_weapon.name == 'Pistol':
 		switch_weapon('Pistol')
 
@@ -61,6 +62,7 @@ func _process(delta):
 
 	if Input.is_key_pressed(KEY_3) and not anim.is_playing() and not current_weapon.name == 'Shotgun':
 		switch_weapon('Shotgun')
+
 
 func switch_weapon(weapon_node):
 	current_weapon.get_node('AnimationPlayer').play('Holster')
